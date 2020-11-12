@@ -4,14 +4,13 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAhfNz84BuDV4R9KhbLsjcA54o4lNDERJU',
-  authDomain: 'reactjs-firebase-boilerplate.firebaseapp.com',
-  databaseURL: 'https://reactjs-firebase-boilerplate.firebaseio.com',
-  projectId: 'reactjs-firebase-boilerplate',
-  storageBucket: 'reactjs-firebase-boilerplate.appspot.com',
-  messagingSenderId: '1081320296000',
-  appId: '1:1081320296000:web:3d97614672f466706959a5',
-  measurementId: 'G-BS2E1Z8XVZ',
+  apiKey: 'AIzaSyAAQF9aupdIx9lCfdNduEpcaNV6Ypbw1JE',
+  authDomain: 'charter-spectrum-table.firebaseapp.com',
+  databaseURL: 'https://charter-spectrum-table.firebaseio.com',
+  projectId: 'charter-spectrum-table',
+  storageBucket: 'charter-spectrum-table.appspot.com',
+  messagingSenderId: '585827779669',
+  appId: '1:585827779669:web:c9b2854be0abc4c10ac0dc',
 };
 // Initialize Firebase
 if (!firebase.apps.length) {
