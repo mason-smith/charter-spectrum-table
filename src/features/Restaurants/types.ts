@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-// Local Dependencies
-
 export type RestaurantProviderProps = {
   children: ReactNode;
 };
@@ -25,6 +23,7 @@ export type Restaurant = {
 
 export type RestaurantContextType = {
   restaurants: Restaurant[];
+  loading: boolean;
   restaurantError: string | null;
   fetchRestaurants: () => void;
 };

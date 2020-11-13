@@ -11,6 +11,7 @@ import {
 /* eslint-disable  @typescript-eslint/no-unused-vars */
 export const restaurantContext = createContext<RestaurantContextType>({
   restaurants: [],
+  loading: false,
   restaurantError: null,
   fetchRestaurants: () => null,
 });
@@ -36,8 +37,10 @@ export function useRestaurants() {
 export function useProvideRestaurants() {
   const [restaurants, setRestaurants] = useState<Restaurant[] | null>([]);
   const [restaurantError, setRestaurantError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchRestaurants = async () => {
+    setLoading(true);
     const restaurantsRef = firestore.collection('restaurants');
     const snapshot = await restaurantsRef.get();
     if (snapshot) {
@@ -45,13 +48,16 @@ export function useProvideRestaurants() {
         return doc.data();
       });
       setRestaurants(docs as Restaurant[]);
+      setLoading(false);
     } else {
       setRestaurantError('Could not find restaurants');
+      setLoading(false);
     }
   };
 
   return {
     restaurants,
+    loading,
     restaurantError,
     fetchRestaurants,
   };
