@@ -1,15 +1,16 @@
 import cuid from 'cuid';
 import React, { useEffect } from 'react';
-import { Container } from 'src/components/Container';
 
 // Local Dependencies
+import { Container } from 'src/components/Container';
+import { Select } from 'src/components/Select';
 import { Table } from 'src/components/Table';
 import { TableBody } from 'src/components/Table/TableBody';
 import { TableCell } from 'src/components/Table/TableCell';
 import { TableFooter } from 'src/components/Table/TableFooter';
 import { TableHead } from 'src/components/Table/TableHead';
 import { TableRow } from 'src/components/Table/TableRow';
-import { useRestaurants } from 'src/features/Restaurants/restaurants.context';
+import { useRestaurants } from 'src/features/Restaurants/hooks';
 
 const tableHeaders = [
   { title: 'Name' },
@@ -17,13 +18,14 @@ const tableHeaders = [
   { title: 'State' },
   { title: 'Phone Number' },
   { title: 'Genres' },
-  { title: '' },
 ];
 
 export const Dashboard = () => {
   const {
     restaurants,
+    states,
     fetchRestaurants,
+    fetchStates,
     nextPage,
     prevPage,
   } = useRestaurants();
@@ -32,11 +34,21 @@ export const Dashboard = () => {
     // In our context
     if (!restaurants.length) {
       fetchRestaurants();
+      fetchStates();
     }
   }, [restaurants]);
 
   return (
     <Container>
+      <div className="flex flex-row w-full">
+        <div className="flex flex-row w-1/2 mr-2">
+          <Select label="Select a state" options={['All', ...states]} />
+        </div>
+        <div className="flex flex-row w-1/2 ml-2">
+          <Select label="Select a genre" options={[]} />
+        </div>
+      </div>
+
       <div className="flex flex-col mt-4">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -88,14 +100,6 @@ export const Dashboard = () => {
                           <p className="text-sm leading-5 text-primary">
                             {result.genre.split(',').join(', ')}
                           </p>
-                        </TableCell>
-                        <TableCell component="td">
-                          <button
-                            type="button"
-                            className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
-                          >
-                            Details
-                          </button>
                         </TableCell>
                       </TableRow>
                     );

@@ -23,9 +23,11 @@ export type Restaurant = {
 
 export type RestaurantContextType = {
   restaurants: Restaurant[];
+  states: [];
   loading: boolean;
   restaurantError: string | null;
   fetchRestaurants: () => void;
+  fetchStates: () => void;
   nextPage: () => void;
   prevPage: () => void;
 };
