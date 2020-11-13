@@ -26,4 +26,6 @@ export type RestaurantContextType = {
   loading: boolean;
   restaurantError: string | null;
   fetchRestaurants: () => void;
+  nextPage: () => void;
+  prevPage: () => void;
 };

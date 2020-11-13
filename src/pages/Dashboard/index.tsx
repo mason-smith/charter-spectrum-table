@@ -6,6 +6,7 @@ import { Container } from 'src/components/Container';
 import { Table } from 'src/components/Table';
 import { TableBody } from 'src/components/Table/TableBody';
 import { TableCell } from 'src/components/Table/TableCell';
+import { TableFooter } from 'src/components/Table/TableFooter';
 import { TableHead } from 'src/components/Table/TableHead';
 import { TableRow } from 'src/components/Table/TableRow';
 import { useRestaurants } from 'src/features/Restaurants/restaurants.context';
@@ -20,7 +21,12 @@ const tableHeaders = [
 ];
 
 export const Dashboard = () => {
-  const { restaurants, loading, fetchRestaurants } = useRestaurants();
+  const {
+    restaurants,
+    fetchRestaurants,
+    nextPage,
+    prevPage,
+  } = useRestaurants();
   useEffect(() => {
     // Only fetch restaurants if there are none
     // In our context
@@ -54,37 +60,34 @@ export const Dashboard = () => {
                         <TableCell component="td">
                           <div className="flex items-center">
                             <div>
-                              <div className="text-sm leading-5 font-medium text-primary">
+                              <p className="text-sm leading-5 font-medium text-primary">
                                 {result.name}
-                              </div>
-                              <div className="text-sm leading-5 text-primary">
+                              </p>
+                              <p className="text-sm leading-5 text-primary">
                                 {result.address1}
-                              </div>
+                              </p>
                             </div>
                           </div>
                         </TableCell>
                         <TableCell component="td">
-                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800">
+                          <p className="text-sm leading-5 text-primary">
                             {result.city}
-                          </span>
+                          </p>
                         </TableCell>
                         <TableCell component="td">
-                          <div className="text-sm leading-5 text-primary">
+                          <p className="text-sm leading-5 text-primary">
                             {result.state}
-                          </div>
-                          {/* <div className="text-sm leading-5 text-primary">
-                            {result.employerId}
-                          </div> */}
+                          </p>
                         </TableCell>
                         <TableCell component="td">
-                          <div className="text-sm leading-5 text-primary">
+                          <p className="text-sm leading-5 text-primary">
                             {result.telephone}
-                          </div>
+                          </p>
                         </TableCell>
                         <TableCell component="td">
-                          <div className="text-sm leading-5 text-primary">
+                          <p className="text-sm leading-5 text-primary">
                             {result.genre.split(',').join(', ')}
-                          </div>
+                          </p>
                         </TableCell>
                         <TableCell component="td">
                           <button
@@ -99,6 +102,7 @@ export const Dashboard = () => {
                   })}
                 </TableBody>
               </Table>
+              <TableFooter prevPage={prevPage} nextPage={nextPage} />
             </div>
           </div>
         </div>
